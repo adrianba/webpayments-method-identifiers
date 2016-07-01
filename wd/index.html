@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" typeof="bibo:Document w3p:WD" prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta lang="" property="dc:language" content="en">
+  <style>
+    /*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+    
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      color: #333;
+      background: #f8f8f8;
+    }
+    
+    .hljs-comment,
+    .hljs-quote {
+      color: #998;
+      font-style: italic;
+    }
+    
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-subst {
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .hljs-number,
+    .hljs-literal,
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-tag .hljs-attr {
+      color: #008080;
+    }
+    
+    .hljs-string,
+    .hljs-doctag {
+      color: #d14;
+    }
+    
+    .hljs-title,
+    .hljs-section,
+    .hljs-selector-id {
+      color: #900;
+      font-weight: bold;
+    }
+    
+    .hljs-subst {
+      font-weight: normal;
+    }
+    
+    .hljs-type,
+    .hljs-class .hljs-title {
+      color: #458;
+      font-weight: bold;
+    }
+    
+    .hljs-tag,
+    .hljs-name,
+    .hljs-attribute {
+      color: #000080;
+      font-weight: normal;
+    }
+    
+    .hljs-regexp,
+    .hljs-link {
+      color: #009926;
+    }
+    
+    .hljs-symbol,
+    .hljs-bullet {
+      color: #990073;
+    }
+    
+    .hljs-built_in,
+    .hljs-builtin-name {
+      color: #0086b3;
+    }
+    
+    .hljs-meta {
+      color: #999;
+      font-weight: bold;
+    }
+    
+    .hljs-deletion {
+      background: #fdd;
+    }
+    
+    .hljs-addition {
+      background: #dfd;
+    }
+    
+    .hljs-emphasis {
+      font-style: italic;
+    }
+    
+    .hljs-strong {
+      font-weight: bold;
+    }
+  </style>
+  <style>
+    /* --- ISSUES/NOTES --- */
+    
+    div.issue-title,
+    div.note-title,
+    div.ednote-title,
+    div.warning-title {
+      padding-right: 1em;
+      min-width: 7.5em;
+      color: #b9ab2d;
+    }
+    
+    div.issue-title {
+      color: #e05252;
+    }
+    
+    div.note-title,
+    div.ednote-title {
+      color: #2b2;
+    }
+    
+    div.warning-title {
+      color: #f22;
+    }
+    
+    div.issue-title span,
+    div.note-title span,
+    div.ednote-title span,
+    div.warning-title span {
+      text-transform: uppercase;
+    }
+    
+    div.note,
+    div.issue,
+    div.ednote,
+    div.warning {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    
+    .note> p:first-child,
+    .ednote> p:first-child,
+    .issue> p:first-child,
+    .warning> p:first-child {
+      margin-top: 0
+    }
+    
+    .issue,
+    .note,
+    .ednote,
+    .warning {
+      padding: .5em;
+      border-left-width: .5em;
+      border-left-style: solid;
+    }
+    
+    div.issue,
+    div.note,
+    div.ednote,
+    div.warning {
+      padding: 1em 1.2em 0.5em;
+      margin: 1em 0;
+      position: relative;
+      clear: both;
+    }
+    
+    span.note,
+    span.ednote,
+    span.issue,
+    span.warning {
+      padding: .1em .5em .15em;
+    }
+    
+    .issue {
+      border-color: #e05252;
+      background: #fbe9e9;
+    }
+    
+    .note,
+    .ednote {
+      border-color: #52e052;
+      background: #e9fbe9;
+    }
+    
+    .warning {
+      border-color: #f11;
+      border-width: .2em;
+      border-style: solid;
+      background: #fbe9e9;
+    }
+    
+    .warning-title:before {
+      content: "⚠";
+      /*U+26A0 WARNING SIGN*/
+      font-size: 3em;
+      float: left;
+      height: 100%;
+      padding-right: .3em;
+      vertical-align: top;
+      margin-top: -0.5em;
+    }
+    
+    li.task-list-item {
+      list-style: none;
+    }
+    
+    input.task-list-item-checkbox {
+      margin: 0 0.35em 0.25em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style id="respec-mainstyle">
+    /*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+    /* Override code highlighter background */
+    
+    .hljs {
+      background: transparent !important;
+    }
+    /* --- INLINES --- */
+    
+    em.rfc2119 {
+      text-transform: lowercase;
+      font-variant: small-caps;
+      font-style: normal;
+      color: #900;
+    }
+    
+    h1 acronym,
+    h2 acronym,
+    h3 acronym,
+    h4 acronym,
+    h5 acronym,
+    h6 acronym,
+    a acronym,
+    h1 abbr,
+    h2 abbr,
+    h3 abbr,
+    h4 abbr,
+    h5 abbr,
+    h6 abbr,
+    a abbr {
+      border: none;
+    }
+    
+    dfn {
+      font-weight: bold;
+    }
+    
+    a.internalDFN {
+      color: inherit;
+      border-bottom: 1px solid #99c;
+      text-decoration: none;
+    }
+    
+    a.externalDFN {
+      color: inherit;
+      border-bottom: 1px dotted #ccc;
+      text-decoration: none;
+    }
+    
+    a.bibref {
+      text-decoration: none;
+    }
+    
+    cite .bibref {
+      font-style: normal;
+    }
+    
+    code {
+      color: #C83500;
+    }
+    /* --- TOC --- */
+    
+    .toc a,
+    .tof a {
+      text-decoration: none;
+    }
+    
+    a .secno,
+    a .figno {
+      color: #000;
+    }
+    
+    ul.tof,
+    ol.tof {
+      list-style: none outside none;
+    }
+    
+    .caption {
+      margin-top: 0.5em;
+      font-style: italic;
+    }
+    /* --- TABLE --- */
+    
+    table.simple {
+      border-spacing: 0;
+      border-collapse: collapse;
+      border-bottom: 3px solid #005a9c;
+    }
+    
+    .simple th {
+      background: #005a9c;
+      color: #fff;
+      padding: 3px 5px;
+      text-align: left;
+    }
+    
+    .simple th[scope="row"] {
+      background: inherit;
+      color: inherit;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple td {
+      padding: 3px 10px;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple tr:nth-child(even) {
+      background: #f0f6ff;
+    }
+    /* --- DL --- */
+    
+    .section dd> p:first-child {
+      margin-top: 0;
+    }
+    
+    .section dd> p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .section dd {
+      margin-bottom: 1em;
+    }
+    
+    .section dl.attrs dd,
+    .section dl.eldef dd {
+      margin-bottom: 0;
+    }
+    
+    .respec-hidden {
+      display: none;
+    }
+    
+    @media print {
+      .removeOnSave {
+        display: none;
+      }
+    }
+  </style>
+  <title>Payment Method Identifiers</title>
+
+
+
+  <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WD">
+  <!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]-->
+  <script id="initialUserConfig" type="application/json">
+    {
+      "shortName": "payment-method-id",
+      "edDraftURI": "http://w3c.github.io/webpayments-method-identifiers/",
+      "specStatus": "ED",
+      "editors": [
+      {
+        "name": "Adrian Bateman",
+        "company": "Microsoft Corporation"
+      },
+      {
+        "name": "Zach Koch",
+        "company": "Google"
+      },
+      {
+        "name": "Richard Barnes",
+        "company": "Mozilla Foundation"
+      },
+      {
+        "name": "Roy McElmurry",
+        "company": "Facebook"
+      }],
+      "license": "w3c-software-doc",
+      "noRecTrack": true,
+      "previousMaturity": "FPWD",
+      "previousPublishDate": "2016-04-21",
+      "wg": "Web Payments Working Group",
+      "wgURI": "https://www.w3.org/Payments/WG/",
+      "wgPublicList": "public-payments-wg",
+      "wgPatentURI": "https://www.w3.org/2004/01/pp-impl/83744/status",
+      "issueBase": "https://github.com/w3c/webpayments-method-identifiers/issues/",
+      "localBiblio":
+      {
+        "PAYMENT-REQUEST-API":
+        {
+          "title": "Payment Request API",
+          "href": "https://www.w3.org/TR/payment-request/",
+          "authors": [
+            "Adrian Bateman",
+            "Zach Koch",
+            "Richard Barnes",
+            "Roy McElmurry"
+          ],
+          "status": "WD"
+        }
+      }
+    }
+  </script>
+</head>
+<body class="h-entry toc-inline" role="document" id="respecDocument">
+  <div class="head" role="contentinfo" id="respecHeader">
+    <p>
+      <a class="logo" href="http://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C"></a>
+    </p>
+    <h1 class="title p-name" id="title" property="dcterms:title">Payment Method Identifiers</h1>
+    <h2 id="w3c-working-draft-05-july-2016"><abbr title="World Wide Web Consortium">W3C</abbr> Working Draft <time property="dcterms:issued" class="dt-published" datetime="2016-07-05">05 July 2016</time></h2>
+    <dl>
+      <dt>This version:</dt>
+      <dd><a class="u-url" href="http://www.w3.org/TR/2016/WD-payment-method-id-20160705/">http://www.w3.org/TR/2016/WD-payment-method-id-20160705/</a></dd>
+      <dt>Latest published version:</dt>
+      <dd><a href="http://www.w3.org/TR/payment-method-id/">http://www.w3.org/TR/payment-method-id/</a></dd>
+      <dt>Latest editor's draft:</dt>
+      <dd><a href="http://w3c.github.io/webpayments-method-identifiers/">http://w3c.github.io/webpayments-method-identifiers/</a></dd>
+      <dt>Previous version:</dt>
+      <dd><a rel="dcterms:replaces" href="http://www.w3.org/TR/2016/WD-payment-method-id-20160421/">http://www.w3.org/TR/2016/WD-payment-method-id-20160421/</a></dd>
+      <dt>Editors:</dt>
+      <dd class="p-author h-card vcard" property="bibo:editor" resource="_:editor0"><span property="rdf:first" typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Adrian Bateman</span>, Microsoft Corporation</span>
+        <span property="rdf:rest" resource="_:editor1"></span>
+      </dd>
+      <dd class="p-author h-card vcard" resource="_:editor1"><span property="rdf:first" typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Zach Koch</span>, Google</span>
+        <span property="rdf:rest" resource="_:editor2"></span>
+      </dd>
+      <dd class="p-author h-card vcard" resource="_:editor2"><span property="rdf:first" typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Richard Barnes</span>, Mozilla Foundation</span>
+        <span property="rdf:rest" resource="_:editor3"></span>
+      </dd>
+      <dd class="p-author h-card vcard" resource="_:editor3"><span property="rdf:first" typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Roy McElmurry</span>, Facebook</span>
+        <span property="rdf:rest" resource="rdf:nil"></span>
+      </dd>
+
+    </dl>
+    <p class="copyright">
+      <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2016
+
+      <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+      <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>,
+      <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>).
+      <abbr title="World Wide Web Consortium">W3C</abbr> <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+      <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and
+      <a rel="license" href="http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules apply.
+    </p>
+    <hr title="Separator for header">
+  </div>
+
+  <section id="abstract" class="introductory" property="dc:abstract">
+    <h2 id="h-abstract" resource="#h-abstract"><span property="xhv:role" resource="xhv:heading">Abstract</span></h2>
+    <p>
+      The Payment Request API [<cite><a class="bibref" href="#bib-PAYMENT-REQUEST-API">PAYMENT-REQUEST-API</a></cite>] requires that merchants supply a list of identifiers for supported payment methods. This document defines those identifier strings and how they are created.
+    </p>
+  </section>
+
+  <section id="sotd" class="introductory">
+    <h2 id="h-sotd" resource="#h-sotd"><span property="xhv:role" resource="xhv:heading">Status of This Document</span></h2>
+    <p>
+      <em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this technical report can be found in the <a href="http://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at http://www.w3.org/TR/.</em>
+    </p>
+
+    <p>
+      The working group maintains <a href="https://github.com/w3c/webpayments-method-identifiers/issues">a
+        list of all bug reports that the group has not yet addressed</a>. This draft highlights some of the pending issues that are still to be discussed in the working group. No decision has been taken on the outcome of these issues including whether they are valid. Pull requests with proposed specification text for outstanding issues are strongly encouraged.
+    </p>
+    <p>
+      This specification was derived from a report published previously by the
+      <a href="https://www.w3.org/community/wicg/">Web Platform Incubator Community Group</a>.
+    </p>
+
+    <p>
+      This document was published by the <a href="https://www.w3.org/Payments/WG/">Web Payments Working Group</a> as a Working Draft. If you wish to make comments regarding this document, please send them to
+      <a href="mailto:public-payments-wg@w3.org">public-payments-wg@w3.org</a> (<a href="mailto:public-payments-wg-request@w3.org?subject=subscribe">subscribe</a>,
+      <a href="http://lists.w3.org/Archives/Public/public-payments-wg/">archives</a>). All comments are welcome.
+    </p>
+    <p>
+      Publication as a Working Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft document and may be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite this document as other than work in progress.
+    </p>
+    <p>
+      This document was produced by a group operating under the
+      <a id="sotd_patent" property="w3p:patentRules" href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent
+              Policy</a>. The group does not expect this document to become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation.
+      <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="https://www.w3.org/2004/01/pp-impl/83744/status" rel="disclosure">public list of any patent
+                disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains
+      <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+              Claim(s)</a> must disclose the information in accordance with
+      <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+              6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+    </p>
+    <p>This document is governed by the <a id="w3c_process_revision" href="http://www.w3.org/2015/Process-20150901/">1 September 2015 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+    </p>
+
+  </section>
+  <nav id="toc">
+    <h2 class="introductory" id="table-of-contents" resource="#table-of-contents"><span property="xhv:role" resource="xhv:heading">Table of Contents</span></h2>
+    <ul class="toc" role="directory">
+      <li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li>
+      <li class="tocline"><a href="#dependencies" class="tocxref"><span class="secno">2. </span>Dependencies</a></li>
+      <li class="tocline"><a href="#payment-method-identifier" class="tocxref"><span class="secno">3. </span>Payment Method Identifier</a>
+        <ul class="toc">
+          <li class="tocline"><a href="#identifier-format" class="tocxref"><span class="secno">3.1 </span>Identifier format</a></li>
+          <li class="tocline"><a href="#identifier-equivalence" class="tocxref"><span class="secno">3.2 </span>Identifier equivalence</a></li>
+        </ul>
+      </li>
+      <li class="tocline"><a href="#issues" class="tocxref"><span class="secno">A. </span>Issues</a></li>
+      <li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a>
+        <ul class="toc">
+          <li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li>
+          <li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">B.2 </span>Informative references</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+
+
+  <section class="informative" id="introduction" typeof="bibo:Chapter" resource="#introduction" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-introduction" resource="#h-introduction"><span property="xhv:role" resource="xhv:heading"><span class="secno">1. </span>Introduction</span></h2>
+    <p><em>This section is non-normative.</em></p>
+    <p>
+      One of the principles of the PaymentRequest API is that merchants must know how to accept payments from the payment methods that they claim to support. This allows the API to abstract away the details of specific payment methods and to add new ones over time without changing the API specification.
+    </p>
+    <p>
+      As part of the paymentRequest() call, the web page provides an array of strings that identify the supported payment methods. This document defines those strings.
+    </p>
+  </section>
+
+  <section id="dependencies" typeof="bibo:Chapter" resource="#dependencies" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-dependencies" resource="#h-dependencies"><span property="xhv:role" resource="xhv:heading"><span class="secno">2. </span>Dependencies</span></h2>
+    <p>This specification relies on several other underlying specifications.</p>
+    <dl>
+      <dt>URL</dt>
+      <dd>The terms <dfn data-dfn-type="dfn" id="dfn-url">URL</dfn>, <dfn data-dfn-type="dfn" id="dfn-absolute-url">absolute URL</dfn>, <dfn data-dfn-type="dfn" id="dfn-base-url">base URL</dfn>, <dfn data-dfn-type="dfn" id="dfn-url-parser">URL parser</dfn>, and <dfn data-dfn-type="dfn" id="dfn-url-equivalence">URL equivalence</dfn> are defined by [<cite><a class="bibref" href="#bib-url-1-20141209">url-1-20141209</a></cite>] <small><em>(or the editor's draft)</em></small>.</dd>
+    </dl>
+  </section>
+
+  <section id="payment-method-identifier" typeof="bibo:Chapter" resource="#payment-method-identifier" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-payment-method-identifier" resource="#h-payment-method-identifier"><span property="xhv:role" resource="xhv:heading"><span class="secno">3. </span>Payment Method Identifier</span></h2>
+    <p>
+      The <dfn data-dfn-type="dfn" id="dfn-payment-method-identifier">Payment Method Identifier</dfn> is a string that uniquely identifies a payment method that a user can use to complete a transaction. For example, Visa, MasterCard, and American Express are payment methods used in some countries.
+    </p>
+
+    <section id="identifier-format" typeof="bibo:Chapter" resource="#identifier-format" property="bibo:hasPart">
+      <h3 id="h-identifier-format" resource="#h-identifier-format"><span property="xhv:role" resource="xhv:heading"><span class="secno">3.1 </span>Identifier format</span></h3>
+      <p>Payment method identifiers are strings containing a <a href="#dfn-url" class="internalDFN" data-link-type="dfn">URL</a>. The string <em class="rfc2119" title="MUST">MUST</em> be an <a href="#dfn-absolute-url" class="internalDFN" data-link-type="dfn">absolute URL</a>.</p>
+    </section>
+
+    <section id="identifier-equivalence" typeof="bibo:Chapter" resource="#identifier-equivalence" property="bibo:hasPart">
+      <h3 id="h-identifier-equivalence" resource="#h-identifier-equivalence"><span property="xhv:role" resource="xhv:heading"><span class="secno">3.2 </span>Identifier equivalence</span></h3>
+      <p>When the PaymentRequest API is invoked, the web page provides a list of identifiers for supported payment methods. The user agent must compare these identifiers to those available to the user and use this to filter what the user can select. To determine whether two identifiers match, perform the following test:</p>
+      <ul>
+        <li>Let <em>A</em> be the first payment method identifier string and let <em>B</em> be the second payment method identifier string.</li>
+        <li>Let <em>urlA</em> be the result from the <a href="#dfn-url-parser" class="internalDFN" data-link-type="dfn">URL parser</a> when parsing <em>A</em> with no <a href="#dfn-base-url" class="internalDFN" data-link-type="dfn">base URL</a>.</li>
+        <li>Let <em>urlB</em> be the result from the <a href="#dfn-url-parser" class="internalDFN" data-link-type="dfn">URL parser</a> when parsing <em>B</em> with no <a href="#dfn-base-url" class="internalDFN" data-link-type="dfn">base URL</a></li>
+        <li>The identifiers match if <em>urlA</em> <strong>equals</strong> <em>urlB</em> using the
+          <a href="#dfn-url-equivalence" class="internalDFN" data-link-type="dfn">URL equivalence</a> test (i.e. the test returns true).</li>
+      </ul>
+    </section>
+  </section>
+
+  <section class="appendix" id="issues" typeof="bibo:Chapter" resource="#issues" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-issues" resource="#h-issues"><span property="xhv:role" resource="xhv:heading"><span class="secno">A. </span>Issues</span></h2>
+
+    <p>The following issues are tracking aspects of the payment method identifier specification:</p>
+
+    <div class="issue">
+      <div class="issue-title marker" aria-level="3" role="heading" id="h-issue1"><span>Issue</span><span style="text-transform: none">: Write-up initial proposal for payment app registration spec</span></div>
+      <div class="">
+        <p>A registration mechanism may exist to install the code for new payment methods into the user agent. This process would add support for a new payment method to the user agent. This mechanism should be defined in a separate specification.</p>
+        <p>There is an initial <a href="https://github.com/WICG/paymentrequest/blob/gh-pages/docs/registration.md">outline making a proposal</a>.</p>
+      </div>
+    </div>
+
+    <div class="issue" id="issue-3">
+      <div class="issue-title marker" aria-level="3" role="heading" id="h-issue2"><a href="https://github.com/w3c/webpayments-method-identifiers/issues/3"><span>Issue 3</span></a><span style="text-transform: none">: Should a payment method identifier (URL) resolve to a machine readable resource that describes it?</span></div>
+      <div class="">
+        <p>There is an open issue about whether payment method identifiers should resolve to a resource if they are URLs.</p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-references" resource="#h-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B. </span>References</span></h2>
+
+    <section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" property="bibo:hasPart">
+      <h3 id="h-normative-references" resource="#h-normative-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B.1 </span>Normative references</span></h3>
+      <dl class="bibliography" resource=""><dt id="bib-url-1-20141209">[url-1-20141209]</dt>
+        <dd>Anne van Kesteren; Sam Ruby. W3C. <a href="https://www.w3.org/TR/2014/WD-url-1-20141209/" property="dc:requires"><cite>URL</cite></a>. 9 December 2014. W3C Working Draft. URL: <a href="https://www.w3.org/TR/2014/WD-url-1-20141209/" property="dc:requires">https://www.w3.org/TR/2014/WD-url-1-20141209/</a>
+        </dd>
+      </dl>
+    </section>
+
+    <section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" property="bibo:hasPart">
+      <h3 id="h-informative-references" resource="#h-informative-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B.2 </span>Informative references</span></h3>
+      <dl class="bibliography" resource=""><dt id="bib-PAYMENT-REQUEST-API">[PAYMENT-REQUEST-API]</dt>
+        <dd>Adrian Bateman; Zach Koch; Richard Barnes; Roy McElmurry. <a href="https://www.w3.org/TR/payment-request/" property="dc:references"><cite>Payment Request API</cite></a>. W3C Working Draft. URL: <a href="https://www.w3.org/TR/payment-request/" property="dc:references">https://www.w3.org/TR/payment-request/</a>
+        </dd>
+      </dl>
+    </section>
+  </section>
+  <p role="navigation" id="back-to-top"><a href="#toc"><abbr title="Back to Top">↑</abbr></a></p>
+  <script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script>
+</body>
+</html>
